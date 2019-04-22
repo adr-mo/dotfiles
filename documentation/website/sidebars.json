@@ -1,0 +1,7 @@
+{
+  "docs": {
+    "Development": ["development"],
+    "Centreon": ["centreon"],
+    "Docker": ["docker"]
+  }
+}
