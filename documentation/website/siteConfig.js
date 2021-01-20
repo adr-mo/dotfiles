@@ -39,7 +39,6 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'development', label: 'development'},
-    {doc: 'centreon', label: 'centreon'},
     {doc: 'docker', label: 'docker'}
   ],
 
