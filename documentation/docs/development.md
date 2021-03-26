@@ -53,7 +53,7 @@ EOF
 
 Once installed then add the following configuration in `/etc/opt/rh/rh-php72/php.d/15-xdebug.ini` (for MacOS users)
 ```
-cat <<EOF > /etc/opt/rh/rh-php72/php.d/15-xdebug.ini
+cat <<EOF > /etc/opt/rh/rh-php73/php.d/15-xdebug.ini
 zend_extension=xdebug.so
 xdebug.remote_enable=1
 xdebug.remote_connect_back=0
@@ -62,6 +62,7 @@ xdebug.idekey=XDEBUG_KEY
 xdebug.var_display_max_data=5000
 xdebug.var_display_max_depth=6
 xdebug.remote_port=9001
+EOF
 ```
 
 Restart the php-fpm and apache processes
