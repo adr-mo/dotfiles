@@ -51,7 +51,7 @@ xdebug.remote_port=9001
 EOF
 ```
 
-Once installed then add the following configuration in `/etc/opt/rh/rh-php72/php.d/15-xdebug.ini` (for MacOS users)
+Once installed then add the following configuration in `/etc/opt/rh/rh-php72/php.d/15-xdebug.ini` (for MacOS users and docker env)
 ```
 cat <<EOF > /etc/opt/rh/rh-php73/php.d/15-xdebug.ini
 zend_extension=xdebug.so
@@ -67,7 +67,7 @@ EOF
 
 Restart the php-fpm and apache processes
 ```
-systemctl restart rh-php72-php-fpm httpd24-httpd
+systemctl restart rh-php73-php-fpm httpd24-httpd
 ```
 
 Module should be visible.
