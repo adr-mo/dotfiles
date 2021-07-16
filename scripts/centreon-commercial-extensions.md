@@ -31,6 +31,19 @@ If you have feature requests or want to report a bug, please contact support.
 
 ## Centreon MBI
 
+### 21.04.2
+
+Release date: `2021-07-15`
+
+#### Bug fixes
+
+- [MBI] BV-BA-Availabilities-1 report missing BA names
+- [BE][Widget] Division by zero in reporting_availability.class.php
+
+#### Security fixes
+
+- [FT-MAP] [REPO] remove old credentials from centreon-mbi 
+
 ### 21.04.0
 
 - Compatibility with Centreon 21.04
