@@ -1,0 +1,57 @@
+MBI 20.04.x,false
+MBI 19.10.0,true
+3.2,true
+3.1.1,true
+3.1.0,true
+3.0.2,true
+3.1.3,true
+3.1.2,true
+3.1.4,true
+3.1.5,true
+3.1.6,true
+3.1.7,true
+3.2.1,true
+18.10.0,true
+MBI 18.10.1,true
+MBI 3.2.2,true
+MBI 18.10.2,true
+MBI 18.10.3,true
+MBI 19.04.0,true
+MBI 19.04.1,true
+MBI 20.04.0,true
+MBI 19.10.1,true
+MBI 19.04.2,true
+MBI 19.04.3,true
+MBI 19.10.2,true
+MBI 19.10.x,false
+MBI 19.04.x,false
+MBI 3.x,false
+MBI 19.10.3,true
+MBI 20.04.1,true
+MBI 19.04.4,true
+MBI 20.04.2,true
+MBI 19.10.4,true
+MBI 20.10.0,true
+MBI 19.04.next,false
+MBI 20.04.3,true
+MBI 19.10.5,true
+MBI 20.10.1,true
+MBI 19.10.6,true
+MBI 20.04.4,true
+MBI 20.10.x,false
+MBI 21.04.x,false
+MBI 21.04.0,true
+MBI 21.04.1,false
+MBI 20.04.5,true
+MBI 20.10.2,true
+MBI 3.2.3,false
+Not Released,false
+MBI 19.10.next,false
+MBI 20.04.6,false
+MBI 20.10.3,true
+MBI 3.2.next,false
+MBI test release,false
+MBI 21.04.next,false
+MBI 21.10.x,false
+MBI 21.10.0,false
+MBI 20.10.next,false
