@@ -135,6 +135,64 @@ Release date: `2021-06-07`
 - [FT-DES] [Resource Status] Action ACL not working
 - [FT-CORE] [LDAP] Adding new user from LDAP results in Request Entity Too Large error
 
+### 21.04.2
+
+Release date: `2021-06-07`
+
+#### Features
+
+- [FRONT|FT-DES] [FE][Graph] Increase font size of Timestamp
+- [FT-CORE] [WEB][PFS] unable to replace 127.0.0.1 by real IP in poller form when already saved in platform_topology
+- [FT-CORE] [Core] Bulk insert in index_data during config generation
+- [FT-CORE] [Core] Purge of index_data is taking too long because of suboptimal SQL query
+- [FT-DES] [Back] Block command from output if ACL doesn't allow
+
+#### Bug fixes
+
+- [FT-CORE] Can not authenticate using API when database name and database username are different from default
+- [FT-CORE] Cannot update to 21.04.02 when you have no metaservices
+- [FT-CORE] [Anomaly] host_id is null is stream connector flow
+- [FT-CONF] [VALIDATION@FEEDBACK] New Logger conf is not correctly exported to distant pollers
+- [FT-CORE] [Core][ACL][BAM] ACL are computed every time for BV
+- [FT-CORE] [Purge] Script can't drop several partitions
+- [BACK|FT-DES] [APIv1] Cannot send external commands anymore
+- [FT-CONF] [API] unable to use v2 api (internal server error)
+- [FT-DES] [Reporting] Dashboard can't display reporting for service (query too long)
+- [FT-DES] [Back][Graphs] : "Filter by Host" filter is not emptied between searches
+- [FT-CONF] [Core/Configuration] Change default values in "Engine Configuration"
+- [FT-CORE] [WEB] Avoid 404 redirection
+- [FT-CORE] [Core/Statistics] Broker statistics for pollers are not shown
+
+#### Security fixes
+
+- [FT-CORE] [SECU][WEB] Packaging, remove . gitignore files
+- [SYNACKTIV] Insecure file upload
+- [SYNACKTIV] XSS reflected on internal API broker configuration
+- [SYNACKTIV] XSS reflected on SNMP trap
+- [SYNACKTIV] XSS reflected on performance Curves
+- [SYNACKTIV] SQL Injection on component templates
+- [SYNACKTIV] SQL Injection on nagios
+- [BACK|FT-DES] [SYNACKTIV] SQL Injection on graph split
+- [BACK|FT-DES] [SYNACKTIV] SQL Injection on graph periods
+- [SYNACKTIV] SQL Injection on ACL resources
+- [SYNACKTIV] SQL Injection on reload ACL
+- [SYNACKTIV] SQL Injection on ACL actions
+- [SYNACKTIV] SQL Injection on trap manufacturer
+- [SYNACKTIV] SQL Injection on reporting export
+- [SYNACKTIV] SQL Injection on generate image
+- [SYNACKTIV] SQL Injection on mediaWiki
+- [Administration / Images] Import of JS in image files
+- [Wizard Remote] Input sent to unserialize() are not sanitized
+- [Wizard Broker] Input sent to unserialize() are not sanitized
+- [FT-CORE] X-Forwarded-For spoofing (study)
+
+#### Others
+
+- [FT-DES] [APIv2] DELETE downtime on host not functionnal
+- [Core/Configuration/Broker] InfluxDB configuration columns are deleted
+- [FT-DES] [Resource Status] Action ACL not working
+- [FT-CORE] [LDAP] Adding new user from LDAP results in Request Entity Too Large error
+
 ### 21.04.0
 
 #### Enhancements
