@@ -1,12 +1,28 @@
 #!/bin/bash
 
-VERSION=${VERSION:-"Centreon Web 999.999"}
 RELEASE_REGEXP='^(.*)\s([0-9]+\.[0-9]+\.[0-9]+)$'
+
+function info() {
+    echo -ne "[INFO] $*"
+}
+
+function error() {
+    echo -ne "[ERROR] $*"
+}
+
+function die() {
+    echo -ne "[FATAL] $*"
+    exit 1
+}
 
 function usage() {
     cat <<EOF
-This script aims to automatically create a release note PR.
-    Usage: VERSION=<release-jira> JIRA_API_TOKEN=<jira-api-token> ${0##*/}
+${0##*/}
+
+> This script aims to automatically create the content of a release note from a Jira Version released.
+> This script also gives the possibility to automatically create the PR on centreon-documentation.
+
+Usage: ${0##*/} --version [JIRA VERSION] --jtoken [JIRA TOKEN] --gtoken [GITHUB AUTH TOKEN]
 EOF
 }
 
@@ -16,6 +32,22 @@ function remove_dquotes () {
     result="${1%\"}"
     result="${result#\"}"
     echo "$result"
+}
+
+function is_commercial_or_open_source_component() {
+    component=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    component_snaked="${component// /-}"
+    file=""
+    if [[ "$component_snaked" =~ (centreon-)?(bam|map|mbi|ppm|lm|license|auto|plugin) ]]; then
+        file="centreon-commercial-extensions.md"
+    elif [[ "$component_snaked" =~ (centreon-)?(ha|open|dsm) ]]; then
+        file="centreon-os-extensions.md"
+    elif [[ "$component_snaked" =~ (centreon-)?(web|engine|broker|clib|connector-ssh|connector-perl|gorgone) ]]; then
+        file="centreon-core.md"
+    else
+        die "Failed to find component location in documentation"
+    fi
+    echo $file
 }
 
 function create_pull_request() {
@@ -36,20 +68,53 @@ function create_pull_request() {
         -d "{\"head\":\"$branch_name\",\"base\":\"master\", \"title\": \"$title\"}"
 }
 
+while (($# > 0)); do
+    case $1 in
+        --help|-h)
+            usage
+            exit
+            ;;
+        --gtoken)
+            GITHUB_AUTH_TOKEN="$2"
+            shift
+            ;;
+        --jtoken)
+            JIRA_TOKEN="$2"
+            shift
+            ;;
+        --jversion)
+            JIRA_VERSION="$2"
+            shift
+            ;;
+        *)
+            usage
+            die "Unknown version provided to the script"
+    esac
+    shift
+done
+
+[[ -z $GITHUB_AUTH_TOKEN ]] && die "Missing --gtoken argument."
+[[ -z $JIRA_TOKEN ]] && die "Missing --jtoken argument value"
+[[ -z $JIRA_VERSION ]] && die "Missing --jversion argument value"
+
+[ -f rn-chunk.md ] && rm rn-chunk.md
+
 # GET version content (releaseDate)
 IFS=$'\n' RELEASE=($(curl -s --request GET 'https://centreon.atlassian.net/rest/api/2/project/MON/versions' \
 --header 'Authorization: Basic YW1vcmFpc0BjZW50cmVvbi5jb206WnBVSjZ5V055STlrZ1FoQlZsTkUyMTBB==' \
---header 'Content-Type: application/json' | jq ".[] | select(.name == \"$VERSION\") | .id, .name, .releaseDate"))
+--header 'Content-Type: application/json' | jq ".[] | select(.name == \"$JIRA_VERSION\") | .id, .name, .releaseDate"))
 
 RELEASE_DATE=$(remove_dquotes ${RELEASE[2]})
 RELEASE_NAME=$(remove_dquotes ${RELEASE[1]})
-RELEASE_COMPONENT=${VERSION% *}
-RELEASE_VERSION=${VERSION##* }
+RELEASE_COMPONENT=${JIRA_VERSION% *}
+RELEASE_VERSION=${JIRA_VERSION##* }
 
-echo "Automated release note"
+info "Automated release note creation for:\\n\\n"
 cat <<EOF
-Version: $RELEASE_VERSION
-Component: $RELEASE_COMPONENT
+    Jira Version: $JIRA_VERSION
+    Component: $RELEASE_COMPONENT
+    Version: $RELEASE_VERSION
+    Release Date: $RELEASE_DATE
 
 EOF
 
@@ -134,24 +199,62 @@ if [[ ( ${#SECURITY[@]} > 0 ) ]]; then
 #### Security fixes
 
 ${SECURITY[*]}
+
 EOF
 fi
 
-cat rn-chunk.md
+if [[ ( ${#OTHERS[@]} > 0 ) ]]; then
+    cat <<EOF >> rn-chunk.md
+#### Others
 
-# gsed -i "/## Centreon MBI/r rn-chunk.md" "centreon-commercial-extensions.md" && rm -f rn-chunk.md# 
+${OTHERS[*]}
+EOF
+fi
 
-# CREATE=0
-# while true; do
-#     git diff
-#     read -p "Do you want to create a PR for this ? " yn
-#     case $yn in
-#         [Yy]* )
-#             create_pull_request $VERSION
-#             break;;
-#         [Nn]* )
-#             git reset --hard HEAD
-#             exit;;
-#         * ) echo "Please answer yes or no.";;
-#     esac
-# done
+info "Content automatically generated from Jira\\n"
+sed "s/^/    /" rn-chunk.md
+
+file=$(is_commercial_or_open_source_component $RELEASE_COMPONENT)
+release_note_file_en="en/releases/$file"
+release_note_file_fr="fr/releases/$file"
+
+info "Versions component release note will be added to $release_note_file_en\\n"
+
+gsed -i "/## $RELEASE_COMPONENT/r rn-chunk.md"  $release_note_file_en
+gsed -i "/## $RELEASE_COMPONENT/r rn-chunk.md"  $release_note_file_fr
+
+rm rn-chunk.md
+
+info "Changes made to the documentation\\n"
+git --no-pager diff
+
+while true; do
+    read -p "Do you want to keep those changes ? " yn
+    case $yn in
+        [Yy]* )
+            break
+            ;;
+        [Nn]* )
+            git reset --hard HEAD
+            exit
+            ;;
+        * )
+            echo "Please answer yes or no.";;
+    esac
+done
+
+CREATE=0
+while true; do
+    read -p "Do you want to create a PR for this ? " yn
+    case $yn in
+        [Yy]* )
+            create_pull_request $VERSION
+            break
+            ;;
+        [Nn]* )
+            break
+            ;;
+        * )
+            echo "Please answer yes or no.";;
+    esac
+done
