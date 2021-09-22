@@ -51,17 +51,22 @@ function is_commercial_or_open_source_component() {
 }
 
 function create_pull_request() {
-    set -x
     local version="$1"
     version_snaked="${version//\./-}"
     version_snaked="${version_snaked// /-}"
     branch_name="release-note-$version_snaked"
     title="doc(release): add release note for $version"
 
+    info "Creating branch $branch_name\\n"
     git checkout -b "$branch_name"
-    git add -p
+    info "Adding changes\\n"
+    git add -A
+    info "Creating commit\\n"
     git commit -m "$title"
+    info "Push changes to origin\\n"
     git push origin "$branch_name"
+
+    info "Creating the pull request on repository\\n"
     curl -s https://api.github.com/repos/adr-mo/personal-repository/pulls \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Authorization: token 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" \
@@ -248,7 +253,7 @@ while true; do
     read -p "Do you want to create a PR for this ? " yn
     case $yn in
         [Yy]* )
-            create_pull_request $VERSION
+            create_pull_request "$JIRA_VERSION"
             break
             ;;
         [Nn]* )
