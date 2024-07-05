@@ -1,0 +1,15 @@
+{
+    "nvim-mod": {
+        "prefix": "nvim-mod",
+        "body": [
+            "return {",
+            "    ${1:module-name},",
+            "    version = false,",
+            "    lazy = false,",
+            "    priority = 1000, -- make sure to load this before all the other start plugins",
+            "    config = function()",
+            "    end",
+            "}"
+        ]
+    }
+}
