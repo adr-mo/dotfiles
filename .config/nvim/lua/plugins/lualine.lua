@@ -4,7 +4,7 @@ local theme = {
     normal = {
         a = { bg = colors.pine, fg = colors.base, gui = 'bold' },
         b = { bg = colors.none, fg = colors.pine },
-        c = { bg = colors.none, fg = colors.pine },
+        c = { bg = colors.none, fg = colors.text },
         x = { bg = colors.none, fg = colors.pine },
     },
     insert = {

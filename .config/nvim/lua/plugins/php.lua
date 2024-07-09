@@ -8,9 +8,6 @@ return {
         config = function()
             require("phpactor").setup({
                 install = {
-                    -- path = vim.fn.stdpath("data") .. "/opt/",
-                    -- branch = "master",
-                    -- bin = vim.fn.stdpath("data") .. "/opt/phpactor/bin/phpactor",
                     bin = "/Users/Adrien/.local/bin/phpactor",
                     php_bin = "php",
                     composer_bin = "composer",

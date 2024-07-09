@@ -62,6 +62,6 @@ return {
             },
         })
 
-        vim.keymap.set('n', '<leader>e', '<cmd>Oil --float<cr>')
+        vim.keymap.set('n', '<leader>e', '<cmd>Oil<cr>')
     end
 }
