@@ -14,11 +14,15 @@ function php.new_class()
     end
 end
 
+function php.move_class()
+    require('phpactor').rpc('move_class')
+end
+
 function php.clear_cache()
     local Terminal = require('toggleterm.terminal').Terminal
     local php_logs = Terminal:new({
         cmd = 'docker exec -ti centreon-dev sudo -u apache /usr/bin/php /usr/share/centreon/bin/console c:c',
-        direction = 'horizontal',
+        direction = 'float',
         close_on_exit = false
     })
     vim.notify('Clearing Symfony cache on container', vim.log.levels.INFO, { title = "PHP" })
@@ -99,6 +103,7 @@ function php.setup()
         'PHP',
         {
             'New class',
+            'Move class',
             'Execute PHPCsFixer',
             'Execute PHPStan',
             'Clear Symfony cache on container',
@@ -106,6 +111,7 @@ function php.setup()
         },
         {
             ['New class'] = php.new_class,
+            ['Move class'] = php.move_class,
             ['Execute PHPCsFixer'] = php.phpcsfixer,
             ['Execute PHPStan'] = php.phpstan,
             ['Clear Symfony cache on container'] = php.clear_cache,

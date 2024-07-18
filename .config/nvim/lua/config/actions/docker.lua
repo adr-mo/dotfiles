@@ -4,7 +4,7 @@ function docker.enter()
     local Terminal = require('toggleterm.terminal').Terminal
     local enter_container = Terminal:new({
         cmd = 'docker exec -ti centreon-dev bash',
-        direction = 'horizontal',
+        direction = 'float',
         close_on_exit = false
     })
 

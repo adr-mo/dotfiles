@@ -3,9 +3,8 @@ return {
     event = 'VeryLazy',
     config = function()
         require('toggleterm').setup {
-            highlights = require("rose-pine.plugins.toggleterm"),
             start_in_insert = true,
-            direction = 'horizontal',
+            direction = 'float',
             shade_terminals = true,
             float_opts = {
                 border = 'curved'

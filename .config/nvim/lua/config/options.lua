@@ -27,6 +27,7 @@ option.undofile = false                -- no undo staging
 option.swapfile = false                -- no swap file
 option.autoread = true                 -- reload file is changed outside nvim
 option.laststatus = 3
+option.hidden = false
 -- option.fillchars = {
 --     stl = "─",
 --     stlnc = "─",
