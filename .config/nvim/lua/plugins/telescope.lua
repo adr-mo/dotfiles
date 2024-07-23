@@ -28,11 +28,12 @@ return {
                     theme = 'dropdown',
                     layout_strategy = 'horizontal',
                     layout_config = {
-                        height = 0.95,
-                        width = 0.95,
-                        prompt_position = 'top'
+                        height = 0.50,
+                        width = 0.80,
+                        prompt_position = 'bottom'
                     },
-                    previewer = true,
+                    sorting_strategy = 'descending',
+                    previewer = false,
                     mappings = {
                         i = {
                             ['<C-d>'] = actions.delete_buffer + actions.move_to_top,
@@ -43,18 +44,19 @@ return {
                     theme = 'dropdown',
                     layout_strategy = 'horizontal',
                     layout_config = {
-                        height = 0.95,
-                        width = 0.95,
-                        prompt_position = 'top'
+                        height = 0.50,
+                        width = 0.80,
+                        prompt_position = 'bottom',
                     },
-                    previewer = true,
+                    sorting_strategy = 'descending',
+                    previewer = false,
                 },
                 lsp_references = {
                     theme = 'dropdown',
                     layout_config = {
-                        height = 0.95,
-                        width = 0.95,
-                        prompt_position = 'top'
+                        height = 0.50,
+                        width = 0.80,
+                        prompt_position = 'bottom'
                     },
                     layout_strategy = 'horizontal',
                     previewer = true,
@@ -63,23 +65,24 @@ return {
                     theme = 'dropdown',
                     layout_strategy = 'horizontal',
                     layout_config = {
-                        height = 0.95,
-                        width = 0.95,
-                        prompt_position = 'top'
+                        height = 0.50,
+                        width = 0.80,
+                        prompt_position = 'bottom'
                     },
-                    previewer = true,
+                    previewer = false,
                     only_cwd = true,
+                    sorting_strategy = 'descending',
                 },
             },
             extensions = {
                 live_grep_args = {
                     theme = 'dropdown',
-                    previewer = true,
+                    previewer = false,
                     layout_strategy = 'horizontal',
                     layout_config = {
-                        height = 0.95,
-                        width = 0.95,
-                        prompt_position = 'top'
+                        height = 0.50,
+                        width = 0.80,
+                        prompt_position = 'bottom'
                     },
                     auto_quoting = true, -- enable/disable auto-quoting
                     -- define mappings, e.g.
@@ -102,7 +105,7 @@ return {
         keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
         keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
         keymap.set("n", "<leader>ft", "<cmd>Telescope live_grep_args<CR>", { desc = "Find string" })
-        keymap.set("n", "<leader>fT", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+        keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 
         keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find in buffers" })
     end,

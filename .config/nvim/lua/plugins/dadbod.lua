@@ -22,7 +22,7 @@ return {
                     "plsql",
                 },
                 callback = function()
-                    require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+                    require('cmp').setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
                 end,
             })
         end,

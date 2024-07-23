@@ -5,12 +5,14 @@ local actions = function()
         {
             'docker',
             'php',
-            'database'
+            'database',
+            'http'
         },
         {
             ['docker'] = require('config.actions.docker').setup,
             ['database'] = require('config.actions.database').setup,
-            ['php'] = require('config.actions.php').setup
+            ['php'] = require('config.actions.php').setup,
+            ['http'] = require('config.actions.http').setup
         }
     )
 end
