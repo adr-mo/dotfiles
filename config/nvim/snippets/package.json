@@ -1,0 +1,1 @@
+{"contributes":{"snippets":[{"language":["php"],"path":".\/php.json"},{"language":["lua"],"path":".\/lua.json"},{"language":["yaml"],"path":".\/yaml.json"}]},"engines":{"vscode":"^1.11.0"},"name":"personal-snippets"}

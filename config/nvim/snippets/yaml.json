@@ -1,0 +1,12 @@
+{
+    "NewRoute": {
+        "prefix": "NewRoute",
+        "body": [
+            "${1:RouteName}:",
+            "  methods: ${2:GET}",
+            "  path: ${3:PATH}",
+            "  controller: ${4:CONTROLLER}",
+            "  condition: \"request.attributes.get('version') >= 24.04\""
+        ]
+    }
+}

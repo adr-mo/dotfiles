@@ -1,0 +1,29 @@
+format = """
+$os\
+$directory\
+$line_break\
+$git_branch\
+$git_state\
+$character"""
+
+[os.symbols]
+Macos = ""
+
+[os]
+format = '[$symbol]($style)'
+
+[directory]
+style = "#d79921 bold"  # Utilisation de la couleur jaune de gruvbox
+
+[character]
+success_symbol = "[❯](#458588)"  # Utilisation de la couleur verte de gruvbox
+error_symbol = "[❯](#fb4934)"  # Utilisation de la couleur rouge de gruvbox
+vimcmd_symbol = "[❮](#458588)"  # Utilisation de la couleur verte de gruvbox
+
+[git_branch]
+format = "[$branch]($style)"
+style = "#d3869b bold"  # Utilisation de la couleur magenta de gruvbox
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "#d3869b"  # Utilisation de la couleur magenta de gruvbox
