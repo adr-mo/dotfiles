@@ -1,44 +1,36 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
-    build = ":TSUpdate",
     dependencies = {
-        "windwp/nvim-ts-autotag",
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
+    event = "BufRead",
     config = function()
-        -- import nvim-treesitter plugin
-        local treesitter = require("nvim-treesitter.configs")
-
-        -- configure treesitter
-        treesitter.setup({ -- enable syntax highlighting
+        require("nvim-treesitter.configs").setup({
+            ensure_installed = {
+                "bash",
+                "css",
+                "html",
+                "javascript",
+                "json",
+                "lua",
+                "make",
+                "http",
+                "markdown",
+                "php",
+                "phpdoc",
+                "query",
+                "sql",
+                "twig",
+                "vim",
+                "vimdoc",
+                "yaml",
+            },
             highlight = {
                 enable = true,
+                use_languagetree = true,
             },
-            -- enable indentation
-            indent = { enable = true },
-            -- enable autotagging (w/ nvim-ts-autotag plugin)
-            autotag = {
+            indent = {
                 enable = true,
-            },
-            -- ensure these language parsers are installed
-            ensure_installed = {
-                "json",
-                "javascript",
-                "typescript",
-                "tsx",
-                "yaml",
-                "html",
-                "css",
-                "markdown",
-                "markdown_inline",
-                "bash",
-                "lua",
-                "vim",
-                "dockerfile",
-                "gitignore",
-                "query",
-                "php",
-                "phpdoc"
             },
             incremental_selection = {
                 enable = true,
@@ -46,9 +38,9 @@ return {
                     init_selection = "<C-space>",
                     node_incremental = "<C-space>",
                     scope_incremental = false,
-                    node_decremental = "<bs>",
                 },
             },
+            additional_vim_regex_highlighting = false,
         })
     end,
 }

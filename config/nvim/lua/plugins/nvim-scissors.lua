@@ -1,8 +1,12 @@
--- lazy.nvim
-return {
-	"chrisgrieser/nvim-scissors",
-	dependencies = "nvim-telescope/telescope.nvim", -- optional
-	opts = {
-		snippetDir = vim.fn.stdpath("config") .. "/snippets/",
-	}
+-- https://github.com/chrisgrieser/nvim-scissors
+local M = { "chrisgrieser/nvim-scissors" }
+
+local options = {
+    snippetDir = vim.fn.stdpath("config") .. "/snippets/",
 }
+
+M.config = function ()
+    require('scissors').setup(options)
+end
+
+return M

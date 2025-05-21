@@ -1,57 +1,23 @@
-return {
-    {
-        'mistweaverco/kulala.nvim',
-        config = function()
-            require('kulala').setup({
-                display_mode = 'float'
-            })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "http",
+    callback = function()
+        -- map "<leader>x' to execute the HTTP request
+        vim.keymap.set("n", "<C-CR>", function()
+            require('kulala').run()
+        end, { buffer = true })
+    end,
+})
 
-            local map = vim.keymap.set
+-- https://github.com/mistweaverco/kulala.nvim
+local M = { 'mistweaverco/kulala.nvim', ft = { "http" } }
 
-            map(
-                "n",
-                "<C-CR>",
-                "<cmd>lua require('kulala').run()<cr>",
-                { noremap = true, silent = true, desc = "Execute the request" }
-            )
-
-            -- map(
-            --     0,
-            --     "n",
-            --     "[",
-            --     "<cmd>lua require('kulala').jump_prev()<cr>",
-            --     { noremap = true, silent = true, desc = "Jump to the previous request" }
-            -- )
-            -- map(
-            --     0,
-            --     "n",
-            --     "]",
-            --     "<cmd>lua require('kulala').jump_next()<cr>",
-            --     { noremap = true, silent = true, desc = "Jump to the next request" }
-            -- )
-            -- map(
-            --     0,
-            --     "n",
-            --     "<leader>i",
-            --     "<cmd>lua require('kulala').inspect()<cr>",
-            --     { noremap = true, silent = true, desc = "Inspect the current request" }
-            -- )
-            --
-            -- map(
-            --     0,
-            --     "n",
-            --     "<leader>co",
-            --     "<cmd>lua require('kulala').copy()<cr>",
-            --     { noremap = true, silent = true, desc = "Copy the current request as a curl command" }
-            -- )
-            --
-            -- vim.api.nvim_buf_set_keymap(
-            --     0,
-            --     "n",
-            --     "<leader>ci",
-            --     "<cmd>lua require('kulala').from_curl()<cr>",
-            --     { noremap = true, silent = true, desc = "Paste curl from clipboard as http request" }
-            -- )
-        end
-    }
+local options = {
+    display_mode = 'float',
+    split_direction = "vertical",
 }
+
+M.config = function ()
+    require('kulala').setup(options)
+end
+
+return M

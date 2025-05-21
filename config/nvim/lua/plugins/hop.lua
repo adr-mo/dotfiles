@@ -1,11 +1,11 @@
--- no longer maintained maybe look at https://github.com/folke/flash.nvim
-return {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-    config = function()
-        require('hop').setup({
-            keys = 'etovxqpdygfblzhckisuran'
-        })
-        vim.keymap.set('n', 'f', '<cmd>:HopWord<cr>', { remap = true })
-    end
+-- https://github.com/smoka7/hop.nvim
+local M = {
+    'smoka7/hop.nvim',
 }
+
+M.config = function()
+    require('hop').setup({ keys = 'etovxqpdygfblzhckisuran' })
+    vim.keymap.set('n', 'f', '<cmd>:HopWord<cr>', { remap = true })
+end
+
+return M

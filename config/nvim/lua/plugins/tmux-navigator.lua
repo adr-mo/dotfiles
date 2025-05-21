@@ -1,6 +1,10 @@
-return {
+-- https://github.com/christoomey/vim-tmux-navigator
+local M = {
     "christoomey/vim-tmux-navigator",
-    config = function()
-        vim.g.tmux_navigator_disable_when_zoomed = 1
-    end
 }
+
+M.config = function()
+    vim.g.tmux_navigator_disable_when_zoomed = 1
+end
+
+return M

@@ -1,19 +1,15 @@
-return {
+local M = {
     'akinsho/toggleterm.nvim',
-    event = 'VeryLazy',
-    config = function()
-        require('toggleterm').setup {
-            start_in_insert = true,
-            direction = 'horizontal',
-            shade_terminals = true,
-            float_opts = {
-                border = 'curved'
-            },
-            on_open = function()
-                vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
-                vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
-            end,
-        }
-        vim.keymap.set('n', '<leader>tt', "<cmd>ToggleTerm direction=float<CR>", { desc = 'Open terminal' }) -- Floating terminal
-    end
+    version = "*",
 }
+
+M.config = function()
+    require('toggleterm').setup({
+        size = 15,
+        direction = 'horizontal'
+    })
+
+    vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm<cr>', { desc = "Open terminal" })
+end
+
+return M
