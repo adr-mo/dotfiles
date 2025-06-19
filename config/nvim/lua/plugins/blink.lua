@@ -2,8 +2,14 @@
 local M = {
     'saghen/blink.cmp',
     dependencies = {
-        'rafamadriz/friendly-snippets',
-        'onsails/lspkind.nvim'
+        { "L3MON4D3/LuaSnip" },
+        {
+            "rafamadriz/friendly-snippets",
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+                require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+            end,
+        }
     },
     version = '1.*',
 }
@@ -22,53 +28,69 @@ local options = {
     },
     keymap = {
         preset = 'super-tab',
-        ['<C-j>'] = { 'select_next', 'fallback' },
         ['<C-k>'] = { 'select_prev', 'fallback' },
+        ['<C-j>'] = { 'select_next', 'fallback' },
     },
     completion = {
-        documentation = {
-            auto_show = true,
-            auto_show_delay_ms = 250,
-            treesitter_highlighting = true,
-            window = { border = "" },
-        },
         menu = {
-            border = '',
+            border = nil,
+            scrolloff = 1,
+            scrollbar = false,
             draw = {
                 columns = {
-                    { "kind_icon", "label", gap = 1 },
+                    { "kind_icon" },
+                    { "label",      "label_description", gap = 1 },
                     { "kind" },
-                },
-                components = {
-                    kind_icon = {
-                        text = function(item)
-                            local kind = require("lspkind").symbol_map[item.kind] or ""
-                            return kind .. " "
-                        end,
-                        highlight = "CmpItemKind",
-                    },
-                    label = {
-                        text = function(item)
-                            return item.label
-                        end,
-                        highlight = "CmpItemAbbr",
-                    },
-                    kind = {
-                        text = function(item)
-                            return item.kind
-                        end,
-                        highlight = "CmpItemKind",
-                    },
+                    { "source_name" },
                 },
             },
         },
+        documentation = {
+            window = {
+                border = nil,
+                scrollbar = false,
+                winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
+            },
+            auto_show = true,
+            auto_show_delay_ms = 500,
+        },
     },
+    -- completion = {
+    --     accept = {
+    --         auto_brackets = { enabled = true },
+    --     },
+    --     documentation = {
+    --         auto_show = true,
+    --         auto_show_delay_ms = 250,
+    --         treesitter_highlighting = true,
+    --         window = { border = "rounded", winblend = 10 }
+    --     },
+    --     menu = {
+    --         border = 'rounded',
+    --         draw = {
+    --             columns = {
+    --                 {
+    --                     "label",
+    --                     "label_description",
+    --                     gap = 1,
+    --                 },
+    --                 {
+    --                     "kind_icon",
+    --                     "kind",
+    --                 }
+    --             }
+    --         }
+    --     }
+    -- },
     signature = {
         enabled = true,
-        window = { border = "" },
+        window = { border = "rounded", winblend = 10 }
+    },
+    snippets = {
+        preset = "luasnip",
     },
     sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'snippets', 'buffer' },
         per_filetype = {
             mysql = { 'snippets', 'dadbod', 'buffer' },
         },

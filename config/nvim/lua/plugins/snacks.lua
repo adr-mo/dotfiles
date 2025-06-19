@@ -25,7 +25,7 @@ M.keys = {
     },
     { "<leader>/",  function() Snacks.picker.grep({}) end,                            desc = "Grep" },
     { "<leader>fr", function() Snacks.picker.recent({ filter = { cwd = true } }) end, desc = "Recent" },
-    { "<leader>sb", function() Snacks.picker.lines() end,                             desc = "Buffer Lines" },
+    { "/",          function() Snacks.picker.lines() end,                             desc = "Buffer Lines" },
     { "<leader>sw", function() Snacks.picker.grep_word() end,                         desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end,                      desc = "Grep in buffers",          mode = { "n", "x" } },
     -- search
@@ -48,31 +48,27 @@ M.opts = {
         enable = true
     },
     picker = {
+        hidden = true,
         layout = {
-            preset = "default",
+            preset = "vscode",
             fullscreen = false,
             cycle = false,
         },
         layouts = {
-            default = {
+            vscode = {
                 preview = false,
                 layout = {
-                    box = "vertical",
                     backdrop = false,
-                    row = -1,
+                    row = 0,
                     width = 0,
-                    height = 0.6,
-                    border = "top",
-                    title = " {title} {live} {flags}",
-                    title_pos = "left",
-                    position = "bottom",
-                    { win = "input", height = 1, border = "bottom" },
-                    {
-                        box = "horizontal",
-                        { win = "list",    border = "none" },
-                        { win = "preview", title = "{preview}", width = 0.6, border = "left" },
-                    },
-                }
+                    min_width = 80,
+                    height = 0.4,
+                    border = "none",
+                    box = "vertical",
+                    { win = "input",   height = 1,          border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+                    { win = "list",    border = "hpad" },
+                    { win = "preview", title = "{preview}", border = "rounded" },
+                },
             }
         },
         sources = {
@@ -91,27 +87,27 @@ M.opts = {
                         },
                     },
                 },
-                layout = {
-                    fullscreen = true,
-                    preview = true,
-                    layout = {
-                        backdrop = false,
-                        width = 40,
-                        min_width = 40,
-                        height = 0,
-                        position = "right",
-                        border = "none",
-                        box = "vertical",
-                        {
-                            win = "input",
-                            height = 1,
-                            border = "rounded",
-                            title = "{title} {live} {flags}",
-                            title_pos = "center",
-                        },
-                        { win = "list", border = "none" },
-                    },
-                },
+                -- layout = {
+                --     fullscreen = true,
+                --     preview = true,
+                --     layout = {
+                --         backdrop = false,
+                --         width = 40,
+                --         min_width = 40,
+                --         height = 0,
+                --         position = "right",
+                --         border = "none",
+                --         box = "vertical",
+                --         {
+                --             win = "input",
+                --             height = 1,
+                --             border = "rounded",
+                --             title = "{title} {live} {flags}",
+                --             title_pos = "center",
+                --         },
+                --         { win = "list", border = "none" },
+                --     },
+                -- },
             },
         },
         formatters = {

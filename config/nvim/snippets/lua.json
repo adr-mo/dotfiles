@@ -1,15 +1,1 @@
-{
-    "nvim-mod": {
-        "prefix": "nvim-mod",
-        "body": [
-            "return {",
-            "    ${1:module-name},",
-            "    version = false,",
-            "    lazy = false,",
-            "    priority = 1000, -- make sure to load this before all the other start plugins",
-            "    config = function()",
-            "    end",
-            "}"
-        ]
-    }
-}
+{"sethl":{"prefix":"sethl","body":"vim.api.nvim_set_hl(0, '${1:Group}', { bg = '${2:background}', fg = '${3:foreground}' })"},"nvim-mod":{"prefix":"nvim-mod","body":["return {","    ${1:module-name},","    version = false,","    lazy = false,","    priority = 1000, -- make sure to load this before all the other start plugins","    config = function()","    end","}"]}}
