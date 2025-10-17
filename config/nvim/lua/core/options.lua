@@ -3,6 +3,7 @@ local global = vim.g
 
 global.mapleader = ' '
 option.relativenumber = true
+option.cursorline = true
 option.number = true
 option.expandtab = true
 option.autoindent = true
@@ -24,7 +25,8 @@ option.scrolloff = 8
 option.termguicolors = true
 option.equalalways = true
 option.cmdheight = 0
-option.laststatus = 0 -- Or 3 for global statusline
+vim.opt.laststatus = 0
+vim.opt.statusline = " %f %m %= %l:%c"
 
 vim.cmd([[set nofoldenable]])
 

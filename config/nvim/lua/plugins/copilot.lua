@@ -20,6 +20,7 @@ copilot.config = function()
         },
         filetypes = {
             yaml = true,
+            php = true,
             markdown = true,
             help = false,
             gitcommit = false,

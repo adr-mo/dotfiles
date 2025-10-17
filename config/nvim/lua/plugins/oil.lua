@@ -88,6 +88,8 @@ M.config = function()
         pattern = "oil",     -- Adjust if Oil uses a specific file type identifier
         callback = function()
             vim.opt_local.cursorline = true
+            vim.opt_local.relativenumber = false
+            vim.opt_local.number = false
         end,
     })
 end

@@ -8,8 +8,8 @@ vim.lsp.enable({
     "marksman",
     "sqlls",
     "yamlls",
-    -- "intelephense",
-    "phpactor",
+    "intelephense",
+    -- "phpactor",
 })
 
 ---@type fun(client: vim.lsp.Client, bufnr: number)
@@ -100,14 +100,13 @@ end
 vim.lsp.config('*', { on_attach = on_attach})
 
 vim.diagnostic.config({
-    -- virtual_lines = true,
-    virtual_text = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-        border = "rounded",
-        source = true,
-    },
-    signs = false,
+	virtual_text = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = true,
+	},
+	signs = false,
 })

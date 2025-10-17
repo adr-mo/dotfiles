@@ -1,6 +1,6 @@
 [colors]
 foreground = "#c8d3f5"
-background = "#000000"
+background = "#222436"
 cursor_bg = "#c8d3f5"
 cursor_border = "#c8d3f5"
 cursor_fg = "#222436"
@@ -42,4 +42,4 @@ bg_color = "#222436"
 [metadata]
 aliases = []
 author = "folke"
-name = "tokyonight_moon_oled"
+name = "tokyonight_moon"

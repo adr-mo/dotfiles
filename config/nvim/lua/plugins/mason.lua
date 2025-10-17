@@ -22,7 +22,9 @@ M.config = function ()
             'sqlls',
             'docker_compose_language_service',
             'dockerls',
-            'phpactor'
+            'biome',
+            'vtsls'
+            -- 'phpactor'
         },
         automatic_installation = true,
         handlers = nil
