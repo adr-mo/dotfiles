@@ -25,24 +25,8 @@ option.scrolloff = 8
 option.termguicolors = true
 option.equalalways = true
 option.cmdheight = 0
-vim.opt.laststatus = 0
-vim.opt.statusline = " %f %m %= %l:%c"
+vim.opt.laststatus = 2
+vim.opt.statusline = " %f%m %=%l/%L %p%% [%{&filetype}] "
 
 vim.cmd([[set nofoldenable]])
 
--- equalize windows on resize
-vim.api.nvim_create_autocmd("VimResized", {
-    callback = function()
-        vim.cmd("wincmd =")
-    end,
-})
--- highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = "ColorColumn",
-      timeout = 200,
-    })
-  end,
-})

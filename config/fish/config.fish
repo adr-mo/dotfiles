@@ -2,54 +2,45 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set -U fish_greeting ""
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+set -g fish_greeting
 
-set -U fish_greeting ""
-
-set -U fish_user_paths /Users/Adrien/.rd/bin:/Users/Adrien/.local/bin:/usr/local/opt/mysql-client@8.4/bin $fish_user_paths
-
-/usr/local/bin/starship init fish | source
-
-set --export EZA_CONFIG_DIR "/Users/Adrien/.config/eza"
-
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --color=bg+:#2d3f76 \
-  --color=bg:#1e2030 \
-  --color=border:#589ed7 \
-  --color=fg:#c8d3f5 \
-  --color=gutter:#1e2030 \
-  --color=header:#ff966c \
-  --color=hl+:#65bcff \
-  --color=hl:#65bcff \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#65bcff \
-  --color=query:#c8d3f5:regular \
-  --color=scrollbar:#589ed7 \
-  --color=separator:#ff966c \
-  --color=spinner:#ff007c \
+set -U fish_user_paths /opt/homebrew/opt/php@8.2/bin
+set fish_user_paths /opt/homebrew/opt/php@8.2/sbin /opt/homebrew/opt/php@8.2/bin
+set -U fish_user_paths /Users/Adrien/.rd/bin:/Users/Adrien/.local/bin:/opt/homebrew/opt/mysql-client@8.4/bin:/opt/homebrew/opt/mysql@8.4/bin $fish_user_paths
+set -Ux FZF_DEFAULT_OPTS "\
+--highlight-line \
+--info=inline-right \
+--ansi \
+--layout=reverse \
+--border=none \
+--color=bg+:#262f33 \
+--color=bg:#1e2528 \
+--color=border:#b2caed \
+--color=fg:#f8f9e8 \
+--color=gutter:#1e2528 \
+--color=header:#f5d098 \
+--color=hl+:#b3e3ca \
+--color=hl:#b3e3ca \
+--color=info:#96b4aa \
+--color=marker:#f3c0e5 \
+--color=pointer:#f3c0e5 \
+--color=prompt:#b3e3ca \
+--color=query:#f8f9e8:regular \
+--color=scrollbar:#b2caed \
+--color=separator:#f5d098 \
+--color=spinner:#f3c0e5
 "
 
-# TokyoNight Color Palette
-set -l foreground c8d3f5
-set -l selection 2d3f76
-set -l comment 636da6
-set -l red ff757f
-set -l orange ff966c
-set -l yellow ffc777
-set -l green c3e88d
-set -l purple fca7ea
-set -l cyan 86e1fc
-set -l pink c099ff
+set -l foreground f8f9e8
+set -l selection 374145
+set -l comment 96b4aa
+set -l red f57f82
+set -l orange f5d098
+set -l yellow f5d098
+set -l green cbe3b3
+set -l purple f3c0e5
+set -l cyan b3e3ca
+set -l pink f6cee5
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -75,13 +66,6 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-set --export --prepend PATH "/usr/local/bin/"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
-# pnpm
-set -gx PNPM_HOME "/Users/Adrien/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-
+starship init fish | source
+zoxide init fish | source
+fzf --fish | source

@@ -1,64 +1,55 @@
-local palette = {
-	normal_fg = "#CCD5E5",
-	float_fg = "#D6DDEA",
-	nontext_fg = "#394156",
-	comment_fg = "#464A68",
-	float_comment_fg = "#585c77",
-	quote_fg = "#566A78",
-
-	-- background
-	normal_bg = "#191d23",
-	normal_bg_alt = "#222731",
-	normal_bg_accent = "#272D39",
-	panel_bg = "#1B1F25",
-	float_bg = "#20242D",
-	float_bg_select = "#1E2944",
-	float_bg_border = "#2A2F39",
-	float_bg_thumb = "#2B303C",
-
-	-- accent
-	v_select = "#111E53",
-	v_select_nontext = "#32416F",
-	string = "#74BAA8",
-	raw_string = "#2B8265",
-	cursor = "#5DCD9A",
-	operator = "#b09884",
-	constant = "#BCB6EC",
-	keyword = "#91A6C7",
-	important = "#6A8BE3",
-	search = "#E9B872",
-	number = "#B85B53",
-	url = "#4F729F",
-
-	-- notifications
-	info = "#1A8C9F",
-	warn = "#FF9B17",
-	error = "#F71735",
-
-	-- git
-	git_add_fg = "#9FDACC",
-	git_add_bg = "#1E3A34",
-	git_add_col_unstaged = "#04724D",
-	git_add_col_staged = "#02442E",
-	git_delete_fg = "#FFC0C5",
-	git_delete_bg = "#3A1A21",
-	git_delete_col_unstaged = "#942B27",
-	git_delete_col_staged = "#671E1B",
-	git_change_fg = "#B7C4FF",
-	git_change_bg = "#1F2B5C",
-	git_change_col_unstaged = "#3F58BB",
-	git_change_col_staged = "#253470",
+local colors = {
+	red = "#F57F82",
+	orange = "#F7A182",
+	yellow = "#F5D098",
+	lime = "#DBE6AF",
+	green = "#CBE3B3",
+	aqua = "#B3E3CA",
+	skye = "#B3E6DB",
+	snow = "#AFD9E6",
+	blue = "#B2CAED",
+	purple = "#D2BDF3",
+	pink = "#F3C0E5",
+	cherry = "#F6CEE5",
+	surface0 = "#262F33",
+	base = "#1E2528",
+	mantle = "#191E21",
+    foreground = "#f8f9e8"
 }
-
 return {
-	"mcauley-penney/techbase.nvim",
-	branch = "lightening",
-	priority = 1000,
-	config = function()
-		vim.cmd.colorscheme("techbase")
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-		vim.api.nvim_set_hl(0, "FloatTitle", { bg = "none" })
-		vim.api.nvim_set_hl(0, "WinSeparator", { fg = palette.normal_bg, bg = palette.normal_bg })
+	"everviolet/nvim",
+	name = "evergarden",
+	priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+	opts = {
+		theme = {
+			variant = "winter", -- 'winter'|'fall'|'spring'|'summer'
+			accent = "green",
+		},
+		editor = {
+			transparent_background = false,
+			sign = { color = "none" },
+			float = {
+				color = "mantle",
+				solid_border = false,
+			},
+			completion = {
+				color = "surface0",
+			},
+		},
+        style = {
+            types = {},
+            keyword = {},
+            comment = {},
+        },
+		overrides = {
+			WinSeparator = { bg = colors.base, fg = colors.base },
+            FloatBorder = { fg = colors.mantle, bg = colors.mantle },
+            FloatTitle = { fg = colors.mantle, bg = colors.cherry },
+            BlinkCmpMenuSelection = { fg = colors.mantle, bg = colors.cherry }
+		},
+	},
+	config = function(_, opts)
+		require("evergarden").setup(opts)
+		vim.cmd.colorscheme("evergarden")
 	end,
 }

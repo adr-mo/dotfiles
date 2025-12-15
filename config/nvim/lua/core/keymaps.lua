@@ -45,3 +45,4 @@ end)
 map("n", "<leader>ct", function()
 	require("phpactor").rpc("transform", {})
 end)
+

@@ -139,46 +139,50 @@ M.opts = {
 	picker = {
 		hidden = true,
 		layout = {
-			preset = "telescope",
+			preset = "custom",
 			fullscreen = false,
 			cycle = false,
 		},
 		layouts = {
-			telescope = {
-				reverse = false,
+			sidebar = {
+				preview = "main",
 				layout = {
-					box = "horizontal",
 					backdrop = false,
-					width = 0.9,
-					height = 0.9,
+					width = 40,
+					min_width = 40,
+					height = 0,
+					position = "left",
 					border = "none",
+					box = "vertical",
 					{
-						box = "vertical",
-						{
-							win = "input",
-							height = 1,
-							border = "rounded",
-							title = "{title} {live} {flags}",
-							title_pos = "center",
-						},
-						{ win = "list", title = " Results ", title_pos = "center", border = "none" },
+						win = "input",
+						height = 1,
+						border = true,
+						title = "{title} {live}",
+						title_pos = "center",
 					},
+					{ win = "list", border = "none" },
+					{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
 				},
 			},
 			custom = {
+				hidden = { "preview" },
 				layout = {
-					box = "horizontal",
+					backdrop = false,
+					row = 2,
 					width = 0.8,
-					min_width = 120,
+					min_width = 80,
 					height = 0.8,
+					border = "none",
+					box = "vertical",
 					{
-						box = "vertical",
-						border = "rounded",
-						title = "{title} {live} {flags}",
-						{ win = "input", height = 1, border = "bottom" },
-						{ win = "list", border = "none" },
+						win = "input",
+						height = 1,
+						border = true,
+						title = "{title} {live}",
+						title_pos = "center",
 					},
-					-- { win = "preview", title = "{preview}", border = "rounded", width = 0.5 },
+					{ win = "list", border = "none" },
 				},
 			},
 		},
@@ -190,7 +194,7 @@ M.opts = {
 				filter = { cwd = true },
 			},
 			explorer = {
-				auto_close = true,
+				auto_close = false,
 				win = {
 					list = {
 						keys = {
@@ -202,7 +206,7 @@ M.opts = {
 		},
 		formatters = {
 			file = {
-				-- filename_first = true,
+				filename_first = true,
 			},
 		},
 	},
@@ -245,8 +249,8 @@ M.opts = {
 	},
 	formatters = {
 		file = {
-			filename_first = true, -- display filename before the file path
-			truncate = 200,
+			-- filename_first = true, -- display filename before the file path
+			-- truncate = 200,
 		},
 	},
 }

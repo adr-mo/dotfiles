@@ -1,5 +1,4 @@
 format = """
-$username\
 $directory\
 $git_branch\
 $git_state\
@@ -8,21 +7,20 @@ $line_break\
 $character"""
 
 [directory]
-format = "[  $path]($style)"
-style = "fg:cyan"
-truncation_length = 3
+style = "fg:#F6CEE5 bold"
 
 [character]
-success_symbol = "[❯](green)"
+success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
 [git_branch]
-format = "[:$branch]($style)"
-style = "purple"
+format = "[$branch]($style)"
+style = "fg:#AFD9E6"
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "purple"
+style = "fg:#AFD9E6"
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -33,4 +31,4 @@ stashed = "≡"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "purple"
+style = "fg:#AFD9E6"

@@ -8,81 +8,75 @@ local function process_path(input)
     end
 end
 
--- https://github.com/stevearc/oil.nvim
-local M = {
+return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "Oil"
-}
+    cmd = "Oil",
+    config = function()
+        require('oil').setup({
+            use_default_keymaps = false,
+            default_file_explorer = true,
+            buf_options = { buflisted = true },
+            keymaps = {
+                ["<Tab>"] = "actions.select",
+                ["<S-Tab>"] = "actions.parent",
+                ["<leader>p"] = "actions.preview",
+                ["<C-r>"] = "actions.refresh",
+                ["q"] = { "actions.close", mode = "n" },
+                ["`"] = "actions.cd",
+                [">"] = {
+                    callback = function()
+                        local oil = require("oil")
 
----@module 'oil'
----@type oil.SetupOpts
-local options = {
-    use_default_keymaps = false,
-    default_file_explorer = true,
-    buf_options = { buflisted = true },
-    keymaps = {
-        ["<Tab>"] = "actions.select",
-        ["<S-Tab>"] = "actions.parent",
-        ["<leader>p"] = "actions.preview",
-        ["<C-r>"] = "actions.refresh",
-        ["q"] = { "actions.close", mode = "n" },
-        ["`"] = "actions.cd",
-        [">"] = {
-            callback = function()
-                local oil = require("oil")
+                        local entry = oil.get_cursor_entry()
+                        local dir = oil.get_current_dir()
+                        if not entry or not dir then
+                            return
+                        end
 
-                local entry = oil.get_cursor_entry()
-                local dir = oil.get_current_dir()
-                if not entry or not dir then
-                    return
-                end
+                        local path = dir .. entry.name
+                        if vim.fn.isdirectory(path) ~= 0 == false then
+                            path = vim.fn.fnamemodify(path, ":p:h")
+                        end
 
-                local path = dir .. entry.name
-                if vim.fn.isdirectory(path) ~= 0 == false then
-                    path = vim.fn.fnamemodify(path, ":p:h")
-                end
-
-                local snacks = require("snacks")
-                snacks.picker.grep({ layout = "ivy", dirs = { path } })
-            end
-        },
-        ["cpp"] = {
-            callback = function()
-                local oil = require('oil')
-                local entry = oil.get_cursor_entry()
-                local dir = oil.get_current_dir()
-                if not entry or not dir then
-                    return
-                end
-                local relpath = vim.fn.fnamemodify(dir, ":.")
-                vim.fn.setreg("+", relpath .. entry.name)
-                vim.notify(relpath .. entry.name .. ' copied to clipboard')
-            end,
-        },
-        ["S"] = {
-            callback = function()
-                local oil = require('oil')
-                local entry = oil.get_cursor_entry()
-                local dir = oil.get_current_dir()
-                if not entry or not dir then
-                    return
-                end
-                local local_path = vim.fn.fnamemodify(dir, ":.") .. entry.name
-                local remove_path = process_path(local_path)
-                os.execute('docker cp ' .. local_path .. ' centreon-app:' .. remove_path .. ' 2>&1 > /dev/null')
-                vim.notify(local_path .. ' synchronized on container !')
-            end,
-        },
-    },
-    view_options = { show_hidden = true },
-    lsp_file_methods = { enabled = false },
-    skip_confirm_for_simple_edits = true,
-    prompt_save_on_select_new_entry = true,
-}
-
-M.config = function()
-    require('oil').setup(options)
+                        local snacks = require("snacks")
+                        snacks.picker.grep({ layout = "ivy", dirs = { path } })
+                    end
+                },
+                ["cpp"] = {
+                    callback = function()
+                        local oil = require('oil')
+                        local entry = oil.get_cursor_entry()
+                        local dir = oil.get_current_dir()
+                        if not entry or not dir then
+                            return
+                        end
+                        local relpath = vim.fn.fnamemodify(dir, ":.")
+                        vim.fn.setreg("+", relpath .. entry.name)
+                        vim.notify(relpath .. entry.name .. ' copied to clipboard')
+                    end,
+                },
+                ["S"] = {
+                    callback = function()
+                        local oil = require('oil')
+                        local entry = oil.get_cursor_entry()
+                        local dir = oil.get_current_dir()
+                        if not entry or not dir then
+                            return
+                        end
+                        local local_path = vim.fn.fnamemodify(dir, ":.") .. entry.name
+                        local remove_path = process_path(local_path)
+                        os.execute('docker cp ' .. local_path .. ' centreon-app:' .. remove_path .. ' 2>&1 > /dev/null')
+                        vim.notify(local_path .. ' synchronized on container !')
+                    end,
+                },
+            },
+            view_options = { show_hidden = true },
+            lsp_file_methods = { enabled = false },
+            skip_confirm_for_simple_edits = true,
+            prompt_save_on_select_new_entry = true,
+        }
+    )
 
     vim.api.nvim_create_autocmd("FileType", {
         pattern = "oil",     -- Adjust if Oil uses a specific file type identifier
@@ -93,5 +87,4 @@ M.config = function()
         end,
     })
 end
-
-return M
+}

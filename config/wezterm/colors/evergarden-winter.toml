@@ -1,0 +1,44 @@
+[metadata]
+name = "Evergarden Winter Cherry"
+
+[colors]
+foreground = "#f8f9e8"
+background = "#1e2528"
+cursor_bg = "#f6cee5"
+cursor_fg = "#171c1f"
+cursor_border = "#f6cee5"
+selection_fg = "#f8f9e8"
+selection_bg = "#374145"
+
+ansi = [
+  "#1e2528", # black
+  "#f57f82", # red
+  "#cbe3b3", # green
+  "#f5d098", # yellow
+  "#b2caed", # blue
+  "#f3c0e5", # magenta
+  "#b3e3ca", # cyan
+  "#f8f9e8", # white
+]
+
+brights = [
+  "#374145", # bright black
+  "#f57f82", # bright red
+  "#cbe3b3", # bright green
+  "#f5d098", # bright yellow
+  "#b2caed", # bright blue
+  "#f3c0e5", # bright magenta
+  "#b3e3ca", # bright cyan
+  "#96b4aa", # bright white
+]
+
+[colors.tab_bar]
+background = "#171c1f"
+
+[colors.tab_bar.active_tab]
+fg_color = "#f8f9e8"
+bg_color = "#1e2528"
+
+[colors.tab_bar.inactive_tab]
+fg_color = "#839e9a"
+bg_color = "#171c1f"
